@@ -1,15 +1,19 @@
 {
   "manifest_version": 2,
-  "name": "Borderify",
+  "name": "Beastify",
   "version": "1.0",
-  "description": "Adds a red border to all webpages matching mozilla.org",
+  "description": "Adds a browser action icon to the toolbar. Click the button to choose a beast. The active tab's body content is then replaced with a picture of the chosen beast. See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Examples#beastify",
+  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/main/beastify",
   "icons": {
-    "48": "icons/border-48.png"
+    "48": "icons/beasts-48.png"
   },
-  "content_scripts": [
-    {
-      "matches": ["*://*.mozilla.org/*"],
-      "js": ["borderify.js"]
-    }
+  "permissions": ["activeTab"],
+  "browser_action": {
+    "default_icon": "icons/beasts-32.png",
+    "default_title": "Beastify",
+    "default_popup": "popup/choose_beast.html"
+  },
+  "web_accessible_resources": [
+    "beasts/*.jpg"
   ]
 }
