@@ -11,8 +11,17 @@ Just highlight any text, press `Ctrl-Shift-E`, and receive an instant AI-generat
 ![Demo](https://github.com/bhavyagada/watdat/blob/main/watdat_demo.gif)
 
 
-## Your API key
+## Screenshots
 
-Open the extension and add your API key (only Groq for now)
+### Open the extension and add your API key (only Groq for now)
 
-![Add API key here](https://github.com/bhavyagada/watdat/blob/main/watdat.png?raw=true)
+![Add API key](https://github.com/bhavyagada/watdat/blob/main/screenshots/watdat_1.png?raw=true)
+
+### Press Ctrl/Cmd+Shift+E
+
+![Press Ctrl/Cmd+Shift+E](https://github.com/bhavyagada/watdat/blob/main/screenshots/watdat_2.png)
+
+### See Explanation by AI
+
+![See AI Explanation](https://github.com/bhavyagada/watdat/blob/main/screenshots/watdat_3.png)
+
