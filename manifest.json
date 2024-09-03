@@ -8,7 +8,7 @@
     "48": "icons/what-48.png",
     "96": "icons/what-96.png"
   },
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "storage"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
