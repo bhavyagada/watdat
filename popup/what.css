@@ -35,3 +35,7 @@ button:hover {
   background-color: #eaea9c;
 }
 
+#api_key_input {
+  width: 100%;
+  font-size: 1em;
+}

@@ -5,10 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupContent = document.getElementById('popup-content');
   const copyButton = document.getElementById('copy_button');
   const clearButton = document.getElementById('clear_button');
+  const apiKeyInput = document.getElementById('api_key_input');
+  const saveApiKeyButton = document.getElementById('save_api_key_button');
 
   const update_popup_content = () => {
-    browser.storage.local.get(["highlighted", "explained"], (result) => {
+    browser.storage.local.get(["highlighted", "explained", "apikey"], (result) => {
       console.log("Local storage data: ", result);
+      if (result.apikey) {
+        apiKeyInput.value = result.apikey;
+        saveApiKeyButton.textContent = 'Update API Key';
+      } else {
+        errorContent.textContent = "Add your API key to begin using the AI."
+      }
       if (result.highlighted) {
         highlightedTextElement.textContent = result.highlighted;
         explainedTextElement.textContent = result.explained || 'Generating explanation...';
@@ -20,6 +28,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   };
+
+  saveApiKeyButton.addEventListener('click', () => {
+    const api_key = apiKeyInput.value.trim();
+    if (api_key) {
+      browser.storage.local.set({ apikey: api_key }).then(() => {
+        console.log('API key saved');
+        saveApiKeyButton.textContent = 'API Key Saved!';
+        setTimeout(() => {
+          saveApiKeyButton.textContent = 'Update API Key!';
+        }, 2000);
+        browser.runtime.sendMessage({ action: "api_key_updated", apikey: api_key });
+      }).catch(error => {
+        console.error(`Failed to save API key: ${error}`);
+      });
+    }
+  });
 
   copyButton.addEventListener('click', () => {
     browser.storage.local.get("explained", (result) => {

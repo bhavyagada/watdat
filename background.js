@@ -1,9 +1,19 @@
-const GROQ_API_KEY = 'YOUR_API_KEY';
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+let GROQ_API_KEY = '';
+browser.storage.local.get("apikey", (result) => {
+  if (result.apikey) {
+    GROQ_API_KEY = result.apikey;
+  }
+});
 
 const explain_text_with_ai = async (text) => {
   console.log("Inside the AI fetch function");
   console.log("Now going to explain", text);
+
+  if (!GROQ_API_KEY) {
+    throw new Error("API key not set. Please set the API key in the extension popup.");
+  }
 
   const response = await fetch(GROQ_API_URL, {
     method: 'POST',
@@ -60,7 +70,9 @@ browser.runtime.onMessage.addListener((message) => {
   if (message.action === "explain_text") {
     console.log(message.text);
     if (message.text === "") {
-      browser.runtime.sendMessage({ action: "show_error" });
+      browser.runtime.sendMessage({ action: "show_error", error: "No text selected. Please highlight some text." });
+    } else if (!GROQ_API_KEY) {
+      browser.runtime.sendMessage({ action: "show_error", error: "API key not set. Please set the API key in the extension popup." });
     } else {
       browser.storage.local.set({
         highlighted: message.text,
@@ -78,6 +90,9 @@ browser.runtime.onMessage.addListener((message) => {
         console.error("Error saving data to storage: ", error);
       });
     }
+  } else if (message.action === "api_key_updated") {
+    GROQ_API_KEY = message.apikey;
+    console.log('API key updated in background script!');
   }
 });
 
