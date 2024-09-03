@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Watdat",
+  "name": "Wat dat",
   "version": "1.0",
   "description": "Highlight any text on the web page and press Ctrl+Shift+E to see an explaination by AI.",
   "homepage_url": "https://github.com/bhavyagada/watdat",
@@ -23,7 +23,7 @@
       "suggested_key": {
         "default": "Ctrl+Shift+E"
       },
-      "description": "Open Watdat extension"
+      "description": "Open Wat dat extension"
     }
   },
   "content_scripts": [
