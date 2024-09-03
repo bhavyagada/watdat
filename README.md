@@ -8,7 +8,8 @@ Just highlight any text, press `Ctrl-Shift-E`, and receive an instant AI-generat
 
 ## Demo
 
-[![Demo](https://github.com/bhavyagada/watdat/blob/main/thumbnail.png?raw=true)](https://github.com/bhavyagada/watdat/blob/main/watdat_demo.mov?raw=true)
+[![Demo](https://github.com/bhavyagada/watdat/blob/main/thumbnail.png)](https://github.com/bhavyagada/watdat/blob/main/watdat_demo.mov)
+
 
 ## Your API key
 
