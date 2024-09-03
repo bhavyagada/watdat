@@ -1,5 +1,5 @@
 document.addEventListener('keydown', (event) => {
-  if (event.ctrlKey && event.key === 'x') {
+  if (event.shiftKey && event.key === 'e') {
     const hightlighted_text = window.getSelection().toString().trim();
     console.log(hightlighted_text);
     browser.runtime.sendMessage({
