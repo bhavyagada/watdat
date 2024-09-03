@@ -1,0 +1,37 @@
+html,
+body {
+  width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: monospace;
+}
+
+h1 { text-align: center; }
+
+#error-content p {
+  font-size: 1em;
+  margin: 3% auto;
+  padding: 4px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  border: none;
+  width: 100%;
+  margin: 3% auto;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  background-color: #fbfbc9;
+}
+
+button:hover {
+  background-color: #eaea9c;
+}
+
