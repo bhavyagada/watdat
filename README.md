@@ -4,14 +4,14 @@ Are you tired of copying and pasting text into an AI for explanations?
 
 This firefox add-on simplifies this process.
 
-Just highlight any text, press `Ctrl-x`, and receive an instant AI-generated explanation. This way, you can maintain your flow without the hassle of manual copy-pasting.
+Just highlight any text, press `Ctrl-Shift-E`, and receive an instant AI-generated explanation. This way, you can maintain your flow without the hassle of manual copy-pasting.
 
-## add your own API key
+## Demo
 
-In background.js
+[![Demo](https://github.com/bhavyagada/watdat/blob/main/thumbnail.png?raw=true)](https://github.com/bhavyagada/watdat/blob/main/watdat_demo.mov?raw=true)
 
-```js
-const GROQ_API_KEY = 'YOUR_API_KEY';
+## Your API key
 
-// rest of the file
-```
+Open the extension and add your API key (only Groq for now)
+
+![Add API key here](https://github.com/bhavyagada/watdat/blob/main/watdat.png?raw=true)
