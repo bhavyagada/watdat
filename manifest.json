@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Watdat",
   "version": "1.0",
-  "description": "Highlight any text on the web page, press <Ctrl-x>, and click the extension button to see an explaination by AI.",
+  "description": "Highlight any text on the web page and press Ctrl+Shift+E to see an explaination by AI.",
   "homepage_url": "https://github.com/bhavyagada/watdat",
   "icons": {
     "48": "icons/what-48.png",

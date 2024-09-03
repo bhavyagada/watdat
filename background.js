@@ -1,18 +1,13 @@
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-
 let GROQ_API_KEY = '';
-browser.storage.local.get("apikey", (result) => {
-  if (result.apikey) {
-    GROQ_API_KEY = result.apikey;
-  }
+
+browser.storage.local.get('apikey').then(result => {
+  GROQ_API_KEY = result.apikey || '';
 });
 
 const explain_text_with_ai = async (text) => {
-  console.log("Inside the AI fetch function");
-  console.log("Now going to explain", text);
-
   if (!GROQ_API_KEY) {
-    throw new Error("API key not set. Please set the API key in the extension popup.");
+    throw new Error('API key not set. Please set the API key in the extension popup.');
   }
 
   const response = await fetch(GROQ_API_URL, {
@@ -22,7 +17,7 @@ const explain_text_with_ai = async (text) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      model: 'llama-3.1-70b-versatile',
+      model: 'llama3-70b-8192',
       messages: [
         { role: 'system', content: 'You are a helpful assistant that explains text concisely and in simple terms.' },
         { role: 'user', content: `Please explain this succinctly: ${text}` }
@@ -49,9 +44,8 @@ const explain_text_with_ai = async (text) => {
         const data = JSON.parse(line.slice(6));
         if (data.choices[0].delta.content) {
           explanation += data.choices[0].delta.content;
-
           browser.runtime.sendMessage({
-            action: "updated_explanation",
+            action: 'updated_explanation',
             partial_explanation: data.choices[0].delta.content
           });
         }
@@ -60,39 +54,27 @@ const explain_text_with_ai = async (text) => {
   }
 
   await browser.storage.local.set({ explained: explanation });
-  console.log("Final explanation saved to storage");
-
   return explanation;
 }
 
-browser.runtime.onMessage.addListener((message) => {
-  console.log("Message received from content script");
-  if (message.action === "explain_text") {
-    console.log(message.text);
-    if (message.text === "") {
-      browser.runtime.sendMessage({ action: "show_error", error: "No text selected. Please highlight some text." });
+browser.runtime.onMessage.addListener(async (message) => {
+  if (message.action === 'explain_text') {
+    if (!message.text) {
+      browser.runtime.sendMessage({ action: 'show_error', error: 'No text selected. Please highlight some text.' });
     } else if (!GROQ_API_KEY) {
-      browser.runtime.sendMessage({ action: "show_error", error: "API key not set. Please set the API key in the extension popup." });
+      browser.runtime.sendMessage({ action: 'show_error', error: 'API key not set. Please set the API key in the extension popup.' });
     } else {
-      browser.storage.local.set({
-        highlighted: message.text,
-        explained: "" // Initialize with empty string
-      }).then(() => {
-        console.log("Initial data saved to storage");
-        explain_text_with_ai(message.text).then(() => {
-          browser.runtime.sendMessage({ action: "explanation_completed" });
-        }).catch(error => {
-          console.error("Error in AI explanation: ", error);
-          browser.runtime.sendMessage({ action: "show_error", error: error.message });
-        });
-        browser.runtime.sendMessage({ action: "update_popup" });
-      }).catch((error) => {
-        console.error("Error saving data to storage: ", error);
-      });
+      try {
+        await browser.storage.local.set({ highlighted: message.text, explained: "" });
+        await explain_text_with_ai(message.text);
+        browser.runtime.sendMessage({ action: 'explanation_completed' });
+      } catch (error) {
+        browser.runtime.sendMessage({ action: 'show_error', error: error.message });
+      }
+      browser.runtime.sendMessage({ action: 'update_popup' });
     }
-  } else if (message.action === "api_key_updated") {
+  } else if (message.action === 'api_key_updated') {
     GROQ_API_KEY = message.apikey;
-    console.log('API key updated in background script!');
   }
 });
 
