@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="what.css" />
-  </head>
-  <body>
-    <h1>Wat dat (AI Explainer)</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watdat (AI Explainer)</title>
+    <link rel="stylesheet" href="what.css">
+</head>
+<body>
+    <h1>Watdat (AI Explainer)</h1>
     <div id="api-key-section">
-      <input type="password" id="api_key_input" placeholder="Enter your Groq API key">
-      <button id="save_api_key_button">Save API Key</button>
+        <input type="password" id="api_key_input" placeholder="Enter API Key">
+        <button id="save_api_key_button">Save API Key</button>
     </div>
-    <div id="popup-content">
-      <h2>Highlighted Text:</h2>
-      <p id="highlighted_text"></p>
-      <h2>Explanation:</h2>
-      <p id="explained_text"></p>
-      <button id="copy_button" type="button">Copy</button>
-      <button id="clear_button" type="reset">Clear</button>
+    <div id="popup-content" class="hidden">
+        <h2>Highlighted Text:</h2>
+        <p id="highlighted_text"></p>
+        <h2>Explanation:</h2>
+        <p id="explained_text"></p>
+        <div id="action-buttons">
+            <button id="copy_button">Copy</button>
+            <button id="clear_button">Clear</button>
+        </div>
     </div>
     <div id="error-content" class="hidden">
-      <p>Highlight some text and press <b>Ctrl+Shift+E</b> to explain it.</p>
+        <p>Highlight some text and press <strong>Shift+E</strong> to explain it.</p>
     </div>
     <script src="what.js"></script>
-  </body>
+</body>
 </html>
+
