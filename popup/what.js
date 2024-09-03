@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const update_popup_content = () => {
     browser.storage.local.get(["highlighted", "explained"], (result) => {
       console.log("Local storage data: ", result);
-      if (result.highlighted && result.explained) {
+      if (result.highlighted) {
         highlightedTextElement.textContent = result.highlighted;
-        explainedTextElement.textContent = result.explained;
+        explainedTextElement.textContent = result.explained || 'Generating explanation...';
         errorContent.classList.add('hidden');
         popupContent.classList.remove('hidden');
       } else {
@@ -48,10 +48,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   browser.runtime.onMessage.addListener((message) => {
     if (message.action === "show_error") {
+      errorContent.textContent = message.error || "An error occurred.";
       errorContent.classList.remove('hidden');
       popupContent.classList.add('hidden');
-    } else {
+    } else if (message.action === "update_popup") {
       update_popup_content();
+    } else if (message.action === "updated_explanation") {
+      if (explainedTextElement.textContent === 'Generating explanation...') {
+        explainedTextElement.textContent = message.partial_explanation;
+      } else {
+        explainedTextElement.textContent += message.partial_explanation;
+      }
+    } else if (message.action === "explanation_completed") {
+      console.log("Explanation generation complete");
     }
   });
 
