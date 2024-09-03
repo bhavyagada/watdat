@@ -22,7 +22,7 @@ const explain_text_with_ai = async (text) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      model: 'mixtral-8x7b-32768',
+      model: 'llama-3.1-70b-versatile',
       messages: [
         { role: 'system', content: 'You are a helpful assistant that explains text concisely and in simple terms.' },
         { role: 'user', content: `Please explain this succinctly: ${text}` }
