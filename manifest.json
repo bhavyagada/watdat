@@ -18,6 +18,14 @@
     "default_title": "Watdat",
     "default_popup": "popup/what.html"
   },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E"
+      },
+      "description": "Open Watdat extension"
+    }
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
