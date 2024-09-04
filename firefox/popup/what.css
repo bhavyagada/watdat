@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    width: 500px;
+    margin: 0;
+    padding: 20px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-top: 0;
+}
+
+h2 {
+    color: #444;
+    margin-top: 20px;
+}
+
+#api-key-section {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#api_key_input {
+    flex-grow: 1;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 0;
+    cursor: pointer;
+}
+
+#highlighted_text, #explained_text {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
+
+.hidden {
+    display: none;
+}
+
+#error-content {
+    color: #333;
+    text-align: center;
+}
+
+#action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#copy_button, #clear_button {
+    flex-basis: 48%;
+}
+

@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Wat dat",
+  "version": "1.0",
+  "description": "Highlight any text on the web page and press Ctrl+E to see an explanation by AI.",
+  "homepage_url": "https://github.com/bhavyagada/watdat",
+  "icons": {
+    "16": "icons/what-16.png",
+    "32": "icons/what-32.png",
+    "48": "icons/what-48.png",
+    "128": "icons/what-128.png"
+  },
+  "permissions": ["activeTab", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/what-16.png",
+      "32": "icons/what-32.png",
+      "48": "icons/what-48.png",
+      "128": "icons/what-128.png"
+    },
+    "default_title": "Wat dat",
+    "default_popup": "popup/what.html"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+E"
+      },
+      "description": "Open Wat dat extension"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
