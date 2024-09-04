@@ -10,8 +10,6 @@ const explain_text_with_ai = async (text) => {
     throw new Error('API key not set. Please set the API key in the extension popup.');
   }
 
-  console.log("Starting API request...");
-
   const response = await fetch(GROQ_API_URL, {
     method: 'POST',
     headers: {
@@ -32,8 +30,6 @@ const explain_text_with_ai = async (text) => {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  console.log("API request successful, starting to read stream...");
-
   const reader = response.body.getReader();
   let explanation = '';
   let buffer = '';
@@ -52,7 +48,6 @@ const explain_text_with_ai = async (text) => {
           const data = JSON.parse(line.slice(6));
           if (data.choices[0].delta.content) {
             explanation += data.choices[0].delta.content;
-            console.log("Sending partial explanation:", data.choices[0].delta.content);
             chrome.runtime.sendMessage({
               action: 'updated_explanation',
               partial_explanation: data.choices[0].delta.content
@@ -65,8 +60,6 @@ const explain_text_with_ai = async (text) => {
     }
   }
 
-  console.log("Stream reading complete. Final explanation:", explanation);
-
   await chrome.storage.local.set({ explained: explanation });
   chrome.runtime.sendMessage({ action: 'explanation_completed', full_explanation: explanation });
   return explanation;
@@ -74,26 +67,21 @@ const explain_text_with_ai = async (text) => {
 
 chrome.runtime.onMessage.addListener((request) => {
   if (request.action === 'explain_text') {
-    console.log("Received request to explain text:", request.text);
     chrome.storage.local.set({ highlighted: request.text, explained: "" }, () => {
       chrome.action.openPopup();
       if (!GROQ_API_KEY) {
-        console.error("API key not set");
         chrome.runtime.sendMessage({ action: 'show_error', error: 'API key not set. Please set the API key in the extension popup.' });
       } else {
         explain_text_with_ai(request.text)
           .then(() => {
-            console.log("Explanation completed");
             chrome.runtime.sendMessage({ action: 'explanation_completed' });
           })
           .catch(error => {
-            console.error("Error during explanation:", error);
             chrome.runtime.sendMessage({ action: 'show_error', error: error.message });
           });
       }
     });
   } else if (request.action === 'api_key_updated') {
-    console.log("API key updated");
     GROQ_API_KEY = request.apikey;
   }
   return true;

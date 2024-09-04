@@ -1,8 +1,6 @@
 window.addEventListener('keydown', (event) => {
   if (event.ctrlKey && (event.key === "E" || event.key === 'e')) {
     const highlightedText = window.getSelection().toString().trim();
-    console.log("Highlighted text:", highlightedText);
-
     if (highlightedText) {
       chrome.runtime.sendMessage({
         action: 'explain_text',
