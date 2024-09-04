@@ -1,10 +1,8 @@
 # Wat dat
 
-Are you tired of copying and pasting text into an AI for explanations?
+Are you tired of copying and pasting text into an AI for explanations? This browser extension simplifies this process.
 
-This firefox add-on simplifies this process.
-
-Just highlight any text, press `Ctrl-Shift-E`, and receive an instant AI-generated explanation. This way, you can maintain your flow without the hassle of manual copy-pasting.
+Just highlight any text, press `Ctrl-Shift-E` (Firefox) or `Ctrl+E` (chrome), and receive an instant AI-generated explanation. This way, you can maintain your flow without the hassle of manual copy-pasting.
 
 ## Demo
 
