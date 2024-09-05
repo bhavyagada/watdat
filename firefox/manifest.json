@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Wat dat",
   "version": "1.0",
-  "description": "Highlight any text on the web page and press Ctrl+Shift+E to see an explaination by AI.",
+  "description": "Highlight any text on the web page and press Ctrl+Shift+X to see an explaination by AI.",
   "homepage_url": "https://github.com/bhavyagada/watdat",
   "icons": {
     "48": "icons/what-48.png",
@@ -21,7 +21,7 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+E"
+        "default": "Ctrl+Shift+X"
       },
       "description": "Open Wat dat extension"
     }

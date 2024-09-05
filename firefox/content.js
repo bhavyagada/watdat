@@ -1,5 +1,5 @@
 document.addEventListener('keydown', async (event) => {
-  if (event.shiftKey && event.key === 'e') {
+  if (event.shiftKey && event.key === 'x') {
     const hightlighted_text = window.getSelection().toString().trim();
     const { apikey } = await browser.storage.local.get('apikey');
     if (apikey) {

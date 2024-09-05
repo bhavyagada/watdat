@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
           saveApiKeyButton.textContent = 'Update API Key!';
         }, 2000);
         browser.runtime.sendMessage({ action: 'api_key_updated', apikey: apiKey });
-        errorContent.textContent = 'Highlight some text and press Ctrl+Shift+E to explain it.';
+        errorContent.textContent = 'Highlight some text and press Ctrl+Shift+X to explain it.';
       } catch (error) {
         console.error('Failed to save API key: ', error);
       }
